@@ -9,6 +9,7 @@ import (
 
 func (i *HostServiceImpl) CreateHost(ctx context.Context, ins *host.Host) (*host.Host, error) {
 	// 直接打印日志
+	i.l.Named("Create").Debug("create host")
 	i.l.Debug("create host")
 	// 带format打印日志，等同于fmt.Sprintf()
 	i.l.Debugf("create host %s", ins.Name)
