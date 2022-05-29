@@ -1,3 +1,5 @@
+package conf
+
 // LogFormat 日志格式
 type LogFormat string
 
