@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/BurntSushi/toml v1.1.0
 	github.com/caarlos0/env/v6 v6.9.2
+	github.com/go-sql-driver/mysql v1.6.0
 	github.com/infraboard/mcube v1.8.8
 	github.com/stretchr/testify v1.7.0
 )

@@ -25,3 +25,12 @@ func TestLoadConfigFromEnv(t *testing.T) {
 		should.Equal("demo2", conf.GetConfig().App.Name)
 	}
 }
+
+func TestGetDB(t *testing.T) {
+	should := assert.New(t)
+	os.Setenv("MYSQL_DATABASE", "unit_tests")
+	err := conf.LoadConfigFromEnv()
+	if should.NoError(err) {
+		conf.GetConfig().MySQL.GetDB()
+	}
+}
