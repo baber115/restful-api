@@ -35,7 +35,7 @@ func LoadConfigFromEnv() error {
 	config = NewDefaultConfig()
 	err := env.Parse(config)
 	if err != nil {
-		return err
+		fmt.Printf("%+v\n", err)
 	}
 
 	return nil

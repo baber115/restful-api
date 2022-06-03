@@ -36,7 +36,7 @@ func NewDefaultMysql() *MySQL {
 		Port:        "3306",
 		UserName:    "root",
 		Password:    "root",
-		Database:    "demo",
+		Database:    "test",
 		MaxOpenConn: 10,
 		MaxIdleConn: 5,
 	}

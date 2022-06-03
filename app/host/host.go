@@ -1,6 +1,9 @@
 package host
 
-import "context"
+import (
+	"context"
+	"time"
+)
 
 // host app service 接口定义
 type Service interface {
@@ -35,6 +38,21 @@ type Host struct {
 	*Resource
 	// 资源独有属性部分
 	*Describe
+}
+
+var (
+//validate = validator.New()
+)
+
+func (h *Host) Validate() error {
+	return nil
+	//return validate.struct()
+}
+
+func (h *Host) InjectDefault() {
+	if h.CreateAt == 0 {
+		h.CreateAt = time.Now().UnixMilli()
+	}
 }
 
 type Vendor int
