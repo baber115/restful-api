@@ -1,5 +1,7 @@
 package conf
 
+import "fmt"
+
 type App struct {
 	Name string `toml:"name" env:"APP_NAME"`
 	Host string `toml:"host" env:"APP_HOST"`
@@ -10,6 +12,9 @@ type App struct {
 	// KeyFile   string `toml:"key_file" env:"APP_KEY_FILE"`
 }
 
+func (a *App) HttpAddr() string {
+	return fmt.Sprintf("%s:%s", a.Host, a.Port)
+}
 func NewDefaultApp() *App {
 	return &App{
 		Name: "demo",

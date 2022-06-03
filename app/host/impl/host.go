@@ -1,9 +1,8 @@
 package impl
 
 import (
-	"context"
-
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
+	"context"
 )
 
 // 业务处理层, controller层
@@ -23,8 +22,7 @@ func (i *HostServiceImpl) CreateHost(ctx context.Context, ins *host.Host) (*host
 	if err := i.save(ctx, ins); err != nil {
 		return ins, err
 	}
-
-	return nil, nil
+	return ins, nil
 }
 
 func (a *HostServiceImpl) QueryHost(ctx context.Context, req *host.QueryHostRequest) (*host.HostSet, error) {

@@ -19,5 +19,5 @@ func (h *Handler) createHost(c *gin.Context) {
 	if err != nil {
 		response.Failed(c.Writer, err)
 	}
-	response.Success(c.Writer, c.Data)
+	response.Success(c.Writer, ins)
 }
