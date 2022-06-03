@@ -24,5 +24,6 @@ type Handler struct {
 
 // 注册路由
 func (h *Handler) Registry(r gin.IRouter) {
-	r.POST("/host", h.createHost)
+	r.POST("/hosts", h.createHost)
+	r.DELETE("/hosts/:id", h.deleteHost)
 }

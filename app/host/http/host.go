@@ -21,3 +21,18 @@ func (h *Handler) createHost(c *gin.Context) {
 	}
 	response.Success(c.Writer, ins)
 }
+
+func (h *Handler) deleteHost(c *gin.Context) {
+	req := &host.DeleteHostRequest{
+		Id: c.Params.ByName("id"),
+	}
+
+	if err := c.Bind(req); err != nil {
+		response.Failed(c.Writer, err)
+	}
+	resp, err := h.svc.DeleteHost(c.Request.Context(), req)
+	if err != nil {
+		response.Failed(c.Writer, err)
+	}
+	response.Success(c.Writer, resp)
+}

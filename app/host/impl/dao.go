@@ -3,6 +3,7 @@ package impl
 import (
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
 	"context"
+	"database/sql"
 )
 
 // 完成对象和数据之前的转换
@@ -63,6 +64,58 @@ func (i *HostServiceImpl) save(ctx context.Context, ins *host.Host) error {
 	if err != nil {
 		return err
 	}
-	
+
 	return nil
+}
+
+func (i *HostServiceImpl) destroy(ctx context.Context, req host.DeleteHostRequest) (*host.Host, error) {
+	// 全局异常
+	var (
+		resStmt  *sql.Stmt
+		descStmt *sql.Stmt
+		err      error
+	)
+	// 重新查询出来
+	ins, err := i.DesribeHost(ctx, host.NewDesribeHostRequestWithID(req.Id))
+	if err != nil {
+		return nil, err
+	}
+
+	tx, err := i.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		if err != nil {
+			if err := tx.Rollback(); err != nil {
+				i.l.Error("rollback error,%s", err)
+			}
+		} else {
+			if err := tx.Commit(); err != nil {
+				i.l.Error("commit error %s,", err)
+			}
+		}
+	}()
+
+	descStmt, err = tx.Prepare(DeleteDescribeSql)
+	if err != nil {
+		return nil, err
+	}
+	defer descStmt.Close()
+	_, err = descStmt.Exec(req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	resStmt, err = tx.Prepare(DeleteResourceSql)
+	if err != nil {
+		return nil, err
+	}
+	defer resStmt.Close()
+	_, err = resStmt.Exec(req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return ins, nil
 }

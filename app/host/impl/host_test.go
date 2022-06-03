@@ -31,9 +31,21 @@ func TestCreate(T *testing.T) {
 	should := assert.New(T)
 	ins := host.NewHost()
 	ins.Name = "test"
+	ins.Id = "ins-02"
 	ins, err := service.CreateHost(context.Background(), ins)
 
 	if should.NoError(err) {
 		fmt.Println(ins)
+	}
+}
+
+func TestDestroy(T *testing.T) {
+	should := assert.New(T)
+	req := host.DeleteHostRequest{}
+	req.Id = "ins-02"
+	err := service.DeleteHost(req)
+	fmt.Println(err)
+	if should.NoError(err) {
+		fmt.Println("destroy success")
 	}
 }
