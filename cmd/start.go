@@ -17,6 +17,7 @@ var (
 
 // 程序启动时组装
 // start command
+// go run main.go start
 var StartCmd = &cobra.Command{
 	Use:   "start",
 	Short: "启动 demo 后端API",
