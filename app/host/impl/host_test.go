@@ -43,8 +43,8 @@ func TestDestroy(T *testing.T) {
 	should := assert.New(T)
 	req := host.DeleteHostRequest{}
 	req.Id = "ins-02"
-	err := service.DeleteHost(req)
-	fmt.Println(err)
+	ins, err := service.DeleteHost(context.Background(), &req)
+	fmt.Println(ins, err)
 	if should.NoError(err) {
 		fmt.Println("destroy success")
 	}

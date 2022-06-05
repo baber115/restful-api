@@ -3,11 +3,13 @@ package cmd
 import (
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app"
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host/http"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host/impl"
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/conf"
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
+
+	// 引入所有服务的实例
+	_ "codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/all"
 )
 
 var (
@@ -35,7 +37,9 @@ var StartCmd = &cobra.Command{
 		//service := impl.NewHostServiceImpl()
 
 		// 注册HostService 的实例到IOC
-		app.HostService = impl.NewHostServiceImpl()
+		//app.HostService = impl.NewHostServiceImpl()
+
+		app.Init()
 
 		// 通过Hst API Handler 提供HTTP RestFul接口
 		api := http.NewHostHTTPHandler()
