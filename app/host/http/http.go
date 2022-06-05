@@ -1,6 +1,7 @@
 package http
 
 import (
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app"
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
 	"github.com/gin-gonic/gin"
 )
@@ -9,10 +10,16 @@ var (
 	API = &Handler{}
 )
 
-func NewHostHTTPHandler(svc host.Service) *Handler {
-	return &Handler{
-		svc: svc,
+func NewHostHTTPHandler() *Handler {
+	return &Handler{}
+}
+
+func (h *Handler) Config() {
+	if app.HostService == nil {
+		panic("dependence host service is nil")
 	}
+	// 从IOC里面获取HostService的实例对象
+	h.svc = app.HostService
 }
 
 // 通过写一个实例类,把内部接口通过http协议暴露出去

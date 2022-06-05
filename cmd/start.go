@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app"
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host/http"
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host/impl"
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/conf"
@@ -30,10 +31,16 @@ var StartCmd = &cobra.Command{
 		}
 
 		// 加载Host Service的实体类
-		service := impl.NewHostServiceImpl()
+		// host service 的具体实现
+		//service := impl.NewHostServiceImpl()
+
+		// 注册HostService 的实例到IOC
+		app.HostService = impl.NewHostServiceImpl()
 
 		// 通过Hst API Handler 提供HTTP RestFul接口
-		api := http.NewHostHTTPHandler(service)
+		api := http.NewHostHTTPHandler()
+		// 从IOS中获取依赖，解除相互依赖
+		api.Config()
 
 		// 提供一个Gin Router
 		g := gin.Default()

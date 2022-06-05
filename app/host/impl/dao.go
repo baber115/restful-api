@@ -68,15 +68,15 @@ func (i *HostServiceImpl) save(ctx context.Context, ins *host.Host) error {
 	return nil
 }
 
-func (i *HostServiceImpl) destroy(ctx context.Context, req host.DeleteHostRequest) (*host.Host, error) {
+func (i *HostServiceImpl) destroy(ctx context.Context, req *host.DeleteHostRequest) (*host.Host, error) {
 	// 全局异常
 	var (
 		resStmt  *sql.Stmt
 		descStmt *sql.Stmt
 		err      error
 	)
-	// 重新查询出来
-	ins, err := i.DesribeHost(ctx, host.NewDesribeHostRequestWithID(req.Id))
+	//// 重新查询出来
+	//ins, err := i.DesribeHost(ctx, host.NewDesribeHostRequestWithID(req.Id))
 	if err != nil {
 		return nil, err
 	}
@@ -117,5 +117,5 @@ func (i *HostServiceImpl) destroy(ctx context.Context, req host.DeleteHostReques
 		return nil, err
 	}
 
-	return ins, nil
+	return nil, nil
 }

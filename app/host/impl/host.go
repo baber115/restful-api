@@ -33,7 +33,7 @@ func (i *HostServiceImpl) UpdateHost(ctx context.Context, req *host.UpdateHostRe
 	return nil, nil
 }
 
-func (i *HostServiceImpl) DeleteHost(ctx context.Context, req host.DeleteHostRequest) (*host.Host, error) {
+func (i *HostServiceImpl) DeleteHost(ctx context.Context, req *host.DeleteHostRequest) (*host.Host, error) {
 	rsp, err := i.destroy(ctx, req)
 	if err != nil {
 		return nil, err
