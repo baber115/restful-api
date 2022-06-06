@@ -13,19 +13,6 @@ var (
 	_ host.Service = &HostServiceImpl{}
 )
 
-func NewHostServiceImpl() *HostServiceImpl {
-	return &HostServiceImpl{
-		// Host Service 服务的子Logger
-		// 封装的Zap让其满足Logger接口
-		// 为什么要封装：
-		// 	1、Logger全局实例
-		// 	2、Logger Level的动态调整，Logrus不支持Level共同调整
-		// 	3、加入日志轮转功能的集合
-		l:  zap.L().Named("Host"),
-		db: conf.GetConfig().MySQL.GetDB(),
-	}
-}
-
 type HostServiceImpl struct {
 	l  logger.Logger
 	db *sql.DB

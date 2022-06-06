@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host/impl"
 	"github.com/infraboard/mcube/logger/zap"
 )
 
@@ -23,8 +22,6 @@ func init() {
 		panic(err)
 	}
 	zap.DevelopmentSetup()
-	// host service的具体实现
-	service = impl.NewHostServiceImpl()
 }
 
 func TestCreate(T *testing.T) {

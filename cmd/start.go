@@ -32,18 +32,9 @@ var StartCmd = &cobra.Command{
 			panic(err)
 		}
 
-		// 加载Host Service的实体类
-		// host service 的具体实现
-		//service := impl.NewHostServiceImpl()
-
-		// 注册HostService 的实例到IOC
-		//app.HostService = impl.NewHostServiceImpl()
-
 		app.Init()
 
-		// 通过Hst API Handler 提供HTTP RestFul接口
 		api := http.NewHostHTTPHandler()
-		// 从IOS中获取依赖，解除相互依赖
 		api.Config()
 
 		// 提供一个Gin Router
