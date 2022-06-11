@@ -2,9 +2,7 @@ package cmd
 
 import (
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host/http"
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/conf"
-	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 
@@ -32,17 +30,12 @@ var StartCmd = &cobra.Command{
 			panic(err)
 		}
 
-		app.Init()
-
-		api := http.NewHostHTTPHandler()
-		api.Config()
+		app.InitImpl()
 
 		// 提供一个Gin Router
 		g := gin.Default()
-		api.Registry(g)
-		g.Run(conf.GetConfig().App.HttpAddr())
-
-		return errors.New("no flags find")
+		app.InitGin(g)
+		return g.Run(conf.GetConfig().App.HttpAddr())
 	},
 }
 

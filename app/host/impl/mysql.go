@@ -22,7 +22,7 @@ var impl = &HostServiceImpl{}
 
 // _ import app 自动执行注册逻辑
 func init() {
-	app.Registry(impl)
+	app.RegistryImpl(impl)
 }
 
 // 只要保证全局对象config和全局logger已经加载完成

@@ -7,19 +7,20 @@ import (
 )
 
 var (
-	API = &Handler{}
+	handler = &Handler{}
 )
 
-func NewHostHTTPHandler() *Handler {
-	return &Handler{}
+func init() {
+	app.RegistryGin(handler)
 }
 
 func (h *Handler) Config() {
-	if app.HostService == nil {
-		panic("dependence host service is nil")
-	}
 	// 从IOC里面获取HostService的实例对象
-	h.svc = app.HostService
+	h.svc = app.GetImpl(host.AppName).(host.Service)
+}
+
+func (h *Handler) Name() string {
+	return host.AppName
 }
 
 // 通过写一个实例类,把内部接口通过http协议暴露出去
