@@ -20,8 +20,8 @@ const (
 	ToStdout = LogTo("stdout")
 )
 
-// Log todo
 // 用于配置全局对象
+// LogTo 日志记录到哪儿 (ToFile,ToStdout)
 type Log struct {
 	Level   string    `toml:"level" env:"LOG_LEVEL"`
 	Format  LogFormat `toml:"format" env:"LOG_FORMAT"`

@@ -2,7 +2,7 @@
 name = "demo"
 host = "0.0.0.0"
 port = "8050"
-key  = "this is your app key"
+key = "this is your app key"
 
 [mysql]
 host = "127.0.0.1"
@@ -13,6 +13,5 @@ database = "test"
 
 [log]
 level = "debug"
-dir = "logs"
 format = "text"
 to = "stdout"

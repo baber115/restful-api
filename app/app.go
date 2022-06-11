@@ -53,6 +53,15 @@ func InitImpl() {
 	}
 }
 
+// 获取已经加载完成的gin app有哪些
+func LoadedGinApps() (names []string) {
+	for k := range ginApp {
+		names = append(names, k)
+	}
+
+	return names
+}
+
 // 用于初始化IOC，注册到IOC容器里的所有服务
 func InitGin(r gin.IRouter) {
 	// 先初始化所有对象

@@ -3,17 +3,18 @@ package impl
 import (
 	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
 	"context"
+	"github.com/infraboard/mcube/logger"
 )
 
 // 业务处理层, controller层
 func (i *HostServiceImpl) CreateHost(ctx context.Context, req *host.Host) (*host.Host, error) {
 	//// 直接打印日志
-	//i.l.Named("Create").Debug("create host")
-	//i.l.Debug("create host")
+	i.l.Named("Creaet").Debug("create host")
+	i.l.Info("create host")
 	//// 带format打印日志，等同于fmt.Sprintf()
-	//i.l.Debugf("create host %s", req.Name)
+	i.l.Debugf("create host %s", req.Name)
 	//// 打印meta数据，常用于Trace系统
-	//i.l.With(logger.NewAny("request-id", "req01")).Debug("create host with meta kv")
+	i.l.With(logger.NewAny("request-id", "req01")).Debug("create host with meta kv")
 
 	if err := i.save(ctx, req); err != nil {
 		return req, err

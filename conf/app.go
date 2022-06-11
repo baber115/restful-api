@@ -15,6 +15,7 @@ type App struct {
 func (a *App) HttpAddr() string {
 	return fmt.Sprintf("%s:%s", a.Host, a.Port)
 }
+
 func NewDefaultApp() *App {
 	return &App{
 		Name: "demo",
