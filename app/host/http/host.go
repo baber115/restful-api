@@ -36,3 +36,29 @@ func (h *Handler) deleteHost(c *gin.Context) {
 	}
 	response.Success(c.Writer, resp)
 }
+
+func (h *Handler) queryHost(c *gin.Context) {
+	// 从http请求的query string 中获取参数
+	req := host.NewQueryHostFromHTTP(c.Request)
+
+	// 进行接口调用, 返回 肯定有成功或者失败
+	set, err := h.svc.QueryHost(c.Request.Context(), req)
+	if err != nil {
+		response.Failed(c.Writer, err)
+		return
+	}
+
+	response.Success(c.Writer, set)
+}
+func (h *Handler) describeHost(c *gin.Context) {
+	// 从http请求的query string 中获取参数
+	req := host.NewDescribeHostRequestWithId(c.Param("id"))
+	// 进行接口调用, 返回 肯定有成功或者失败
+	set, err := h.svc.DescribeHost(c.Request.Context(), req)
+	if err != nil {
+		response.Failed(c.Writer, err)
+		return
+	}
+
+	response.Success(c.Writer, set)
+}

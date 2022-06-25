@@ -9,7 +9,7 @@ type Service interface {
 	// 列表查询
 	QueryHost(context.Context, *QueryHostRequest) (*HostSet, error)
 	// 详情查询
-	DescribeHost(context.Context, *Describe) (*Host, error)
+	DescribeHost(context.Context, *DescribeHostRequest) (*Host, error)
 	// 更新
 	UpdateHost(context.Context, *UpdateHostRequest) (*Host, error)
 	// 删除

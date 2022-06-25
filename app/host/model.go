@@ -1,20 +1,31 @@
 package host
 
 import (
+	"net/http"
+	"strconv"
 	"time"
 )
 
 // 定义列表返回的字段
 type HostSet struct {
-	Items []*Host
-	total int
+	Total int     `json:"total"`
+	Items []*Host `json:"items"`
 }
 
+func NewHostSet() *HostSet {
+	return &HostSet{
+		Items: []*Host{},
+	}
+}
 func NewHost() *Host {
 	return &Host{
 		Resource: &Resource{},
 		Describe: &Describe{},
 	}
+}
+
+func (s *HostSet) Add(item *Host) {
+	s.Items = append(s.Items, item)
 }
 
 // host模型的定义
@@ -76,7 +87,30 @@ type Describe struct {
 	SerialNumber string `json:"serial_number"`              // 序列号
 }
 
+func NewQueryHostRequest() *QueryHostRequest {
+	return &QueryHostRequest{
+		PageSize:   20,
+		PageNumber: 1,
+	}
+}
+func NewDescribeHostRequestWithId(id string) *DescribeHostRequest {
+	return &DescribeHostRequest{
+		Id: id,
+	}
+}
+
 type QueryHostRequest struct {
+	PageSize   int    `json:"page_size"`
+	PageNumber int    `json:"page_number"`
+	Keywords   string `json:"kws"`
+}
+
+func (req *QueryHostRequest) GetPageNumber() uint {
+	return uint(req.PageNumber)
+}
+
+func (req *QueryHostRequest) Offset() int64 {
+	return int64((req.PageNumber - 1) * req.PageSize)
 }
 
 type UpdateHostRequest struct {
@@ -84,5 +118,27 @@ type UpdateHostRequest struct {
 }
 
 type DeleteHostRequest struct {
+	Id string
+}
+
+func NewQueryHostFromHTTP(r *http.Request) *QueryHostRequest {
+	req := NewQueryHostRequest()
+	// query string
+	qs := r.URL.Query()
+	pss := qs.Get("page_size")
+	if pss != "" {
+		req.PageSize, _ = strconv.Atoi(pss)
+	}
+
+	pns := qs.Get("page_number")
+	if pns != "" {
+		req.PageNumber, _ = strconv.Atoi(pns)
+	}
+
+	req.Keywords = qs.Get("kws")
+	return req
+}
+
+type DescribeHostRequest struct {
 	Id string
 }

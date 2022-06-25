@@ -27,7 +27,11 @@ INSERT INTO host ( resource_id, cpu, memory, gpu_amount, gpu_spec, os_type, os_n
 		( ?,?,?,?,?,?,?,? );
 `
 
-	queryHostSQL = `SELECT * FROM resource as r LEFT JOIN host h ON r.id=h.resource_id`
+	queryHostSQL = `
+SELECT *
+FROM resource as r
+         LEFT JOIN host h ON r.id = h.resource_id
+`
 
 	DeleteResourceSql = `delete from resource where id=?`
 
