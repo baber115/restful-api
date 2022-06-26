@@ -70,3 +70,13 @@ func TestDescribe(T *testing.T) {
 		fmt.Println(ins.Id)
 	}
 }
+
+func TestUpdate(T *testing.T) {
+	should := assert.New(T)
+	req := host.NewPatchUpdateHostRequest("ins-02")
+	req.Name = "patch update"
+	ins, err := service.UpdateHost(context.Background(), req)
+	if should.NoError(err) {
+		fmt.Println(ins.Id)
+	}
+}

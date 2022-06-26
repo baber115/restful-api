@@ -36,4 +36,7 @@ FROM resource as r
 	DeleteResourceSql = `delete from resource where id=?`
 
 	DeleteDescribeSql = `delete from host where resource_id=?`
+
+	updateResourceSQL = `UPDATE resource SET vendor=?,region=?,expire_at=?,name=?,description=? WHERE id = ?`
+	updateHostSQL     = `UPDATE host SET cpu=?,memory=? WHERE resource_id = ?`
 )

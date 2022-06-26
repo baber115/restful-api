@@ -50,6 +50,7 @@ var StartCmd = &cobra.Command{
 		svc := newManager()
 
 		ch := make(chan os.Signal, 1)
+		// channel是一种复合数据结构，可以当一个容器，make的时候开辟的内存空间，如果不关闭会一直留存在那，最终导致内存溢出
 		signal.Notify(ch, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGHUP, syscall.SIGINT)
 		go svc.WaitStop(ch)
 

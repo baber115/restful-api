@@ -119,3 +119,48 @@ func (i *HostServiceImpl) destroy(ctx context.Context, req *host.DeleteHostReque
 
 	return nil, nil
 }
+
+func (i *HostServiceImpl) update(ctx context.Context, ins *host.Host) error {
+	var err error
+	// 开启事务
+	tx, err := i.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			if err := tx.Rollback(); err != nil {
+				i.l.Error("rollback error,%s", err)
+			}
+		} else {
+			if err := tx.Commit(); err != nil {
+				i.l.Error("commit error %s,", err)
+			}
+		}
+	}()
+
+	// 更新resource表
+	var (
+		resStmt, hostStmt *sql.Stmt
+	)
+	resStmt, err = tx.PrepareContext(ctx, updateResourceSQL)
+	if err != nil {
+		return err
+	}
+	_, err = resStmt.Exec(ins.Vendor, ins.Region, ins.ExpireAt, ins.Name, ins.Description, ins.Id)
+	if err != nil {
+		return err
+	}
+
+	// 更新host表
+	hostStmt, err = tx.PrepareContext(ctx, updateHostSQL)
+	if err != nil {
+		return err
+	}
+	_, err = hostStmt.Exec(ins.CPU, ins.Memory, ins.Id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

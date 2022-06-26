@@ -1,6 +1,7 @@
 package host
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -78,6 +79,7 @@ type Resource struct {
 }
 
 type Describe struct {
+	ResourceId   string `json:"id"  validate:"required"`    // 全局唯一Id
 	CPU          int    `json:"cpu" validate:"required"`    // 核数
 	Memory       int    `json:"memory" validate:"required"` // 内存
 	GPUAmount    int    `json:"gpu_amount"`                 // GPU数量
@@ -99,6 +101,23 @@ func NewDescribeHostRequestWithId(id string) *DescribeHostRequest {
 	}
 }
 
+func NewPutUpdateHostRequest(id string) *UpdateHostRequest {
+	h := NewHost()
+	h.Id = id
+	return &UpdateHostRequest{
+		UpdateMode: UPDATE_PUT_PUT,
+		Host:       h,
+	}
+}
+func NewPatchUpdateHostRequest(id string) *UpdateHostRequest {
+	h := NewHost()
+	h.Id = id
+	return &UpdateHostRequest{
+		UpdateMode: UPDATE_PUT_PATCH,
+		Host:       h,
+	}
+}
+
 type QueryHostRequest struct {
 	PageSize   int    `json:"page_size"`
 	PageNumber int    `json:"page_number"`
@@ -113,8 +132,20 @@ func (req *QueryHostRequest) Offset() int64 {
 	return int64((req.PageNumber - 1) * req.PageSize)
 }
 
+// 这里新定义UPDATE_MODE string 是需要限制必须传put或者patch这两个值
+// 如果用string的话，可以任意传值
+type UPDATE_MODE string
+
+const (
+	// 全量更新
+	UPDATE_PUT_PUT UPDATE_MODE = "PUT"
+	// 局部更新
+	UPDATE_PUT_PATCH UPDATE_MODE = "PATCH"
+)
+
 type UpdateHostRequest struct {
-	*Describe
+	UpdateMode UPDATE_MODE `json:"update_mode"`
+	*Host
 }
 
 type DeleteHostRequest struct {
@@ -141,4 +172,30 @@ func NewQueryHostFromHTTP(r *http.Request) *QueryHostRequest {
 
 type DescribeHostRequest struct {
 	Id string
+}
+
+// 全量更新
+func (h *Host) Put(obj *Host) error {
+	if obj.Id != h.Id {
+		return fmt.Errorf("id not equal")
+	}
+	*h.Resource = *obj.Resource
+	// 这是整个对象的拷贝，更新的时候只更新值，不更新对象，所以不建议这么写
+	//h.Describe = obj
+	// 这是值的拷贝
+	*h.Describe = *obj.Describe
+
+	return nil
+}
+
+// 部分更新
+func (h *Host) Patch(obj *Host) error {
+	if obj.Name != "" {
+		h.Name = obj.Name
+	}
+	if obj.CPU != 0 {
+		h.CPU = obj.CPU
+	}
+
+	return nil
 }

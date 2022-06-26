@@ -36,4 +36,6 @@ func (h *Handler) Registry(r gin.IRouter) {
 	r.DELETE("/hosts/:id", h.deleteHost)
 	r.GET("/hosts", h.queryHost)
 	r.GET("/hosts/:id", h.describeHost)
+	r.PUT("/hosts/:id", h.putUpdateHost)
+	r.PATCH("/hosts/:id", h.patchUpdateHost)
 }
