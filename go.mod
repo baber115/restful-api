@@ -1,4 +1,4 @@
-module codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07
+module codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api
 
 go 1.18
 
@@ -6,7 +6,9 @@ require (
 	github.com/BurntSushi/toml v1.1.0
 	github.com/caarlos0/env/v6 v6.9.2
 	github.com/gin-gonic/gin v1.7.7
+	github.com/go-playground/validator/v10 v10.11.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/imdario/mergo v0.3.13
 	github.com/infraboard/mcube v1.8.8
 	github.com/spf13/cobra v1.3.0
 	github.com/stretchr/testify v1.7.0
@@ -17,7 +19,6 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
-	github.com/go-playground/validator/v10 v10.11.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -37,5 +38,5 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.0 // indirect
 )

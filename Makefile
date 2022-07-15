@@ -1,4 +1,4 @@
-PROJECT_NAME=resftful-api-demo-07
+PROJECT_NAME=go-resftful-api
 MAIN_FILE=main.go
 PKG := "codeup.aliyun.com/625e2dd5594c6cca64844075/$(PROJECT_NAME)"
 MOD_DIR := $(shell go env GOMODCACHE)

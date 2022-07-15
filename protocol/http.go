@@ -1,8 +1,8 @@
 package protocol
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/conf"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/conf"
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"

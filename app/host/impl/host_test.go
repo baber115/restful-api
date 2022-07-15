@@ -1,14 +1,14 @@
 package impl_test
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host/impl"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/conf"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/host/impl"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/conf"
 	"context"
 	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/host"
 	"github.com/infraboard/mcube/logger/zap"
 )
 
@@ -75,6 +75,17 @@ func TestUpdate(T *testing.T) {
 	should := assert.New(T)
 	req := host.NewPatchUpdateHostRequest("ins-02")
 	req.Name = "patch update"
+	ins, err := service.UpdateHost(context.Background(), req)
+	if should.NoError(err) {
+		fmt.Println(ins.Id)
+	}
+}
+
+func TestPatch(t *testing.T) {
+	should := assert.New(t)
+
+	req := host.NewPatchUpdateHostRequest("ins-09")
+	req.Description = "Patch更新模式测试"
 	ins, err := service.UpdateHost(context.Background(), req)
 	if should.NoError(err) {
 		fmt.Println(ins.Id)

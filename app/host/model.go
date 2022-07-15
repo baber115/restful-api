@@ -2,6 +2,8 @@ package host
 
 import (
 	"fmt"
+	"github.com/go-playground/validator/v10"
+	"github.com/imdario/mergo"
 	"net/http"
 	"strconv"
 	"time"
@@ -38,12 +40,11 @@ type Host struct {
 }
 
 var (
-//validate = validator.New()
+	validate = validator.New()
 )
 
 func (h *Host) Validate() error {
-	return nil
-	//return validate.struct()
+	return validate.Struct(h)
 }
 
 func (h *Host) InjectDefault() {
@@ -190,12 +191,14 @@ func (h *Host) Put(obj *Host) error {
 
 // 部分更新
 func (h *Host) Patch(obj *Host) error {
-	if obj.Name != "" {
-		h.Name = obj.Name
-	}
-	if obj.CPU != 0 {
-		h.CPU = obj.CPU
-	}
+	//if obj.Name != "" {
+	//	h.Name = obj.Name
+	//}
+	//if obj.CPU != 0 {
+	//	h.CPU = obj.CPU
+	//}
+	//
+	//return nil
 
-	return nil
+	return mergo.MergeWithOverwrite(h, obj)
 }

@@ -1,7 +1,7 @@
 package http
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/host"
 	"github.com/gin-gonic/gin"
 	"github.com/infraboard/mcube/http/response"
 )

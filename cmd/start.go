@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/conf"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/protocol"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/conf"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/protocol"
 	"fmt"
 	"github.com/infraboard/mcube/logger"
 	"github.com/infraboard/mcube/logger/zap"
@@ -13,7 +13,7 @@ import (
 	"syscall"
 
 	// 引入所有服务的实例
-	_ "codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/all"
+	_ "codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/all"
 )
 
 var (

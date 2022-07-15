@@ -1,9 +1,9 @@
 package impl
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/app/host"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/restful-api-demo-07/conf"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/host"
+	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/conf"
 	"database/sql"
 	"github.com/infraboard/mcube/logger"
 	"github.com/infraboard/mcube/logger/zap"
