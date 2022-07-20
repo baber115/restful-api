@@ -1,11 +1,12 @@
 package conf_test
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/conf"
 	"fmt"
-	"github.com/stretchr/testify/assert"
+	"go-restful-api/conf"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestLoadConfigFromToml(t *testing.T) {

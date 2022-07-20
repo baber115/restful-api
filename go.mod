@@ -1,4 +1,4 @@
-module codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api
+module go-restful-api
 
 go 1.18
 

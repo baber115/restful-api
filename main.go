@@ -1,8 +1,8 @@
 package main
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/cmd"
 	"fmt"
+	"go-restful-api/cmd"
 )
 
 // 启动接口程序

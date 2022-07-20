@@ -1,0 +1,9 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+go: warning: "codeup.aliyun.com/625e2dd5594c6cca64844075/go-resftful-api/..." matched no packages
+
+make.exe: Entering directory 'e:/go_project/go-restful-api'
+go mod tidy
+ 
+go build -ldflags "-s -w" -o dist/demo-api main.go
+make.exe: Leaving directory 'e:/go_project/go-restful-api'
+ 

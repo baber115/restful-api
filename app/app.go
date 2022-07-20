@@ -1,8 +1,9 @@
 package app
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/host"
 	"fmt"
+	"go-restful-api/app/host"
+
 	"github.com/gin-gonic/gin"
 )
 

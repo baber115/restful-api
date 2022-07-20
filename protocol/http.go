@@ -1,16 +1,17 @@
 package protocol
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/conf"
 	"context"
 	"fmt"
+	"go-restful-api/app"
+	"go-restful-api/conf"
+	"net/http"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/infraboard/mcube/http/middleware/cors"
 	"github.com/infraboard/mcube/logger"
 	"github.com/infraboard/mcube/logger/zap"
-	"net/http"
-	"time"
 )
 
 // NewHTTPService 构建函数

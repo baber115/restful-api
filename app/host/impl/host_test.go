@@ -1,14 +1,16 @@
 package impl_test
 
 import (
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/host/impl"
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/conf"
 	"context"
 	"fmt"
-	"github.com/stretchr/testify/assert"
+	"go-restful-api/app/host/impl"
+	"go-restful-api/conf"
 	"testing"
 
-	"codeup.aliyun.com/625e2dd5594c6cca64844075/go-restful-api/app/host"
+	"github.com/stretchr/testify/assert"
+
+	"go-restful-api/app/host"
+
 	"github.com/infraboard/mcube/logger/zap"
 )
 
